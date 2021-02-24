@@ -9,12 +9,14 @@ export async function httpRequest(method, url, payload) {
   return await new Promise((resolve, reject) => {
     try {
       api[method](url, payload)
-        .then((res) => resolve(res.data))
-        .catch((rej) => {
-          reject(rej.response);
+        .then((res) => {
+          return resolve(res.data);
+        })
+        .catch((err) => {
+          return reject(err.response);
         });
     } catch (err) {
-      return reject(err);
+      return reject({});
     }
   });
 }
